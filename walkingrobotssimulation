@@ -1,0 +1,137 @@
+class Pair{
+    int x,y;
+    Pair(int x,int y){
+        this.x=x;
+        this.y=y;
+    }
+    
+public boolean equals(Object o){
+    if(this == o) return true;
+    if(!(o instanceof Pair)) return false;
+    Pair p = (Pair)o;
+    return this.x == p.x && this.y == p.y;
+}
+
+
+public int hashCode(){
+    return Objects.hash(x,y);
+}
+}
+
+class Solution {
+    public int robotSim(int[] crr, int[][] brr) {
+        char dir='N';
+        int x=0,y=0;
+        int maxdistance=-1;
+        HashSet<Pair> set=new HashSet<>();
+        int n=brr.length;
+        for(int i=0;i<n;i++){
+            int a=brr[i][0];
+            int b=brr[i][1];
+            set.add(new Pair(a,b));
+        }
+        
+        int m=crr.length;
+        for(int i=0;i<m;i++){
+            if(crr[i]==-2){
+                if(dir=='N'){
+                    //x--;
+                    dir='W';
+                    //if(set.contains(new Pair(x,y))) x++;
+                }
+                else if(dir=='W'){
+                    //y--;
+                    dir='S';
+                    //if(set.contains(new Pair(x,y))) y++;
+
+                }
+                else if(dir=='S'){
+                   // x++;
+                    dir='E';
+                  //  if(set.contains(new Pair(x,y))) x--;
+                }
+                else{
+                    
+                    dir='N';
+                   // if(set.contains(new Pair(x,y))) y--;
+                }
+                
+            }
+            else if(crr[i]==-1){
+                if(dir=='N'){
+                    
+                    dir='E';
+                    
+                }
+                else if(dir=='S'){
+                
+                    dir='W';
+                    if(set.contains(new Pair(x,y))) x++;
+                }
+                else if(dir=='E'){
+                
+                    dir='S';
+                
+                }
+                else{
+                    
+                    dir='N';
+                   // if(set.contains(new Pair(x,y))) y--;
+                }
+            }
+            else{
+                if(dir=='N'){
+                    for(int j=1;j<=crr[i];j++){
+                        y+=1;
+                        if(set.contains(new Pair(x,y))){
+                            y--;
+                            break;
+                        }
+                        
+                    }
+                }
+                else if(dir=='S'){
+                    for(int j=1;j<=crr[i];j++){
+                          y-=1;
+                        if(set.contains(new Pair(x,y))){
+                            y++;
+                            
+                            break;
+                        }
+                    }
+                }
+                else if(dir=='W'){
+                    for(int j=1;j<=crr[i];j++){
+                        x-=1;
+                       if(set.contains(new Pair(x,y))){
+                            x++;
+                            
+                            break;
+                        }
+
+                    }
+                }
+                else{
+                     for(int j=1;j<=crr[i];j++){
+                        x+=1;
+                       if(set.contains(new Pair(x,y))){
+                            x--;
+                            
+                            break;
+                        }
+                     }
+
+                }
+
+
+
+            }
+            maxdistance=Math.max(x*x +y*y,maxdistance);
+            
+        }
+        return maxdistance;
+
+
+    }
+    
+}
