@@ -1,0 +1,23 @@
+class Solution {
+    public void binary(int[] arr,int i ,int j,HashMap<Integer,Integer> map,int k){
+        while(i<j){
+            int d=Math.abs(arr[i]-arr[j]);
+            if(d==k){
+                 map.put(arr[i],arr[j]);
+                return;
+            }
+            if(d>k) j--;
+            else i++;
+        }
+    }
+    public int findPairs(int[] nums, int k) {
+        int n=nums.length;
+        Arrays.sort(nums);
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n-1;i++){
+            binary(nums,i,n-1,map,k);
+        }
+        return map.size();
+        
+    }
+}
