@@ -1,0 +1,25 @@
+class Solution {
+    public int xorAfterQueries(int[] nums, int[][] arr) {
+        int n=arr.length, m=nums.length;
+        for(int i=0;i<n;i++){
+            int idx=arr[i][0];
+            int r=arr[i][1];
+            int k=arr[i][2];
+            int v=arr[i][3];
+            while(idx<=r){
+                long val=((long)nums[idx]*v)%(1000000007);
+                nums[idx]=(int)val;
+                idx+=k;
+            }
+        }
+        int ans=nums[0];
+        for(int i=1;i<m;i++){
+            ans=ans^nums[i];
+        }
+        return ans;
+
+
+
+        
+    }
+}
