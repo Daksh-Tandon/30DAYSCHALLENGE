@@ -1,0 +1,25 @@
+class Solution {
+    public boolean hasAlternatingBits(int n) {
+        StringBuilder sb=new StringBuilder();
+        int rev=0,ans=0;
+        while(n!=0){
+            int rem=n%2;
+            n=n/2;
+            sb.append(rem);
+
+        }
+       
+   
+        int m=sb.length();
+        for(int i=1;i<m;i++){
+            if(sb.charAt(i)==sb.charAt(i-1)) return false;
+          
+        }
+
+  
+        return true;
+        
+
+        
+    }
+}
