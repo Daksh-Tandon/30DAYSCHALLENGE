@@ -1,0 +1,47 @@
+class Solution {
+    public List<Integer> solveQueries(int[] nums, int[] q) {
+        int m=q.length,n=nums.length;
+        List<Integer> ans2=new ArrayList<>();
+        HashMap<Integer,List<Integer>> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(map.containsKey(nums[i])){
+                List<Integer> x=map.get(nums[i]);
+                x.add(i);
+            }
+            else{
+                map.put(nums[i],new ArrayList<>());
+                map.get(nums[i]).add(i);
+            }
+        }
+        for(int i=0;i<m;i++){
+                int idx=q[i];
+                List<Integer> ans=map.get(nums[idx]);
+                if(ans.size()==1) ans2.add(-1);
+                else{
+                
+                   int k = Collections.binarySearch(ans, idx);
+                    int lk=(ans.size()+k-1)%ans.size();
+                    int rk=(k+1)%ans.size();
+                    int d1=Math.abs(ans.get(lk)-idx);
+                    int d2=Math.abs(ans.get(rk)-idx);
+                    int minans=Math.min(d1,n-d1);
+                    int minans2=Math.min(d2,n-d2);
+                    ans2.add(Math.min(minans,minans2));
+
+                }
+
+            }
+            return ans2;
+        
+
+
+
+
+      
+
+
+
+        
+        
+    }
+}
