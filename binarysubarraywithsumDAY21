@@ -1,0 +1,23 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        int n=nums.length;
+        for(int i=1;i<n;i++){
+            nums[i]+=nums[i-1];
+        }
+        int count=0;
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            int rem=nums[i]-goal;
+            if(rem==0) count++;
+            if(map.containsKey(rem)) count+=map.get(rem);
+
+            if(map.containsKey(nums[i])){
+                int f=map.get(nums[i]);
+                map.put(nums[i],f+1);
+            }
+            else map.put(nums[i],1);
+        }
+        return count;
+        
+    }
+}
