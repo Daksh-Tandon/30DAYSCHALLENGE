@@ -1,0 +1,30 @@
+class Solution {
+    public int furthestDistanceFromOrigin(String s) {
+        int n=s.length(); 
+        int countl=0,countr=0;
+        char a='L';
+        int ans=0;
+        for(int i=0;i<n;i++){
+            char ch=s.charAt(i);
+            if(ch=='L') countl++;
+            else if(ch=='R') countr++;
+        }
+        if(countr>countl) a='R';
+        for(int i=0;i<n;i++){
+            char ch=s.charAt(i);
+            if(ch=='_'){
+                if(a=='R') ans++;
+                else ans--;
+            }
+            else if(ch=='L') ans--;
+            else ans++;
+        }
+        return Math.abs(ans);
+
+
+
+        
+        
+        
+    }
+}
